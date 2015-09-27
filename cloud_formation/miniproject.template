@@ -1,0 +1,77 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "instancei25546b86": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "DisableApiTermination": "false",
+        "InstanceInitiatedShutdownBehavior": "stop",
+        "ImageId": "ami-e3106686",
+        "InstanceType": "t2.micro",
+        "Monitoring": "false",
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
+              "\n",
+              [
+                "#!/usr/bin/env bash",
+                "yum -y install httpd",
+                "echo \"<html><head><title>SMP</title></head><body><h1>AUTOMATION FOR THE PEOPLE</h1></body></html>\" > /var/www/html/index.html",
+                "chown apache:apache /var/www/html/index.html",
+                "service httpd start"
+              ]
+            ]
+          }
+        },
+        "NetworkInterfaces": [
+          {
+            "DeleteOnTermination": "true",
+            "DeviceIndex": 0,
+            "SubnetId": "subnet-41c38469",
+            "PrivateIpAddresses": [
+              {
+                "PrivateIpAddress": "172.31.38.139",
+                "Primary": "true"
+              }
+            ],
+            "GroupSet": [
+              {
+                "Ref": "sgminiproject"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sgminiproject": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Mini-Project Security Group",
+        "VpcId": "vpc-78a0401d"
+      }
+    },
+    "ingress1": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupId": {
+          "Ref": "sgminiproject"
+        },
+        "IpProtocol": "tcp",
+        "FromPort": "80",
+        "ToPort": "80",
+        "CidrIp": "0.0.0.0/0"
+      }
+    },
+    "egress1": {
+      "Type": "AWS::EC2::SecurityGroupEgress",
+      "Properties": {
+        "GroupId": {
+          "Ref": "sgminiproject"
+        },
+        "IpProtocol": "-1",
+        "CidrIp": "0.0.0.0/0"
+      }
+    }
+  },
+  "Description": "mini-project"
+}
