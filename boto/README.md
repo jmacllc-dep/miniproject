@@ -5,9 +5,12 @@ Python/Boto script that will create an AWS webserver inside the miniproject Secu
 
 Requirements
 ------------
-AWS Account and credentials with sufficient permissions to create resources. 
-Python 2.7 - 3.3 installed on the machine where the script will run. 
-boto==2.38.0 (available in requirements.txt for easy installation via pip). 
+AWS Account and credentials with sufficient permissions to create resources.
+ 
+Python 2.7 - 3.3 installed on the machine where the script will run.
+ 
+boto==2.38.0 (available in requirements.txt for easy installation via pip).
+ 
 *recommend python pip to simplify boto installation. 
 
 Usage
