@@ -1,68 +1,22 @@
 miniproject Cookbook
 ====================
-TODO: Enter the cookbook description here.
+Chef cookbook/recipe to bootstrap an AWS webserver inside the default VPC/Security Group and display a message web page. 
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - miniproject needs toaster to brown your bagel.
-
-Attributes
-----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### miniproject::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['miniproject']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+AWS Account and credentials with sufficient permissions to create resources. 
+AWS key-pair name and identity file (.pem file)
+ChefDK with knife-ec2 plugin installed on your workstation
+Chef Server to upload miniproject cookbook
+Platform: CentOS/RHEL based ami such as ami-e3106686
 
 Usage
 -----
-#### miniproject::default
-TODO: Write usage instructions for each cookbook.
+1. Copy miniproject cookbook to chef-repo/cookbooks/ on your workstation
+2. Upload cookbook to chef server:
+   knife cookbook upload miniproject
+3. Inside the chef-repo on your workstation execute the following command:
+   knife ec2 server create -I ami-e3106686 -f t2.micro --ssh-key awskeypairname -A 'ACCESSKEY' -K "AWSSECRETKEY" --identity-file your-ec2.pem --ssh-user ec2-user --run-list "recipe[miniproject]"
 
-e.g.
-Just include `miniproject` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[miniproject]"
-  ]
-}
-```
-
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors
+*NOTE - Remember to terminate instances after you're done testing. 
