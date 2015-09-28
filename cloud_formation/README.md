@@ -4,8 +4,10 @@ Cloud Formation template to create an AWS web server instance that will display 
 
 Requirements
 ------------
-AWS Account and credentials with sufficient permissions to create resources. 
-AWS CLI tools installed and configured to create the stack from the template. 
+AWS Account and credentials with sufficient permissions to create resources.
+ 
+AWS CLI tools installed and configured to create the stack from the template.
+ 
 Port 80 http access allowed on your default Security Group. 
 
 Usage

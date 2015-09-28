@@ -5,11 +5,15 @@ Chef cookbook/recipe to bootstrap an AWS webserver inside the default VPC/Securi
 
 Requirements
 ------------
-AWS Account and credentials with sufficient permissions to create resources. 
+AWS Account and credentials with sufficient permissions to create resources.
+ 
 AWS key-pair name and identity file (.pem file)
+
+Port 80 access open on your default Security Group
+
 ChefDK with knife-ec2 plugin installed on your workstation
+
 Chef Server to upload miniproject cookbook
-Platform: CentOS/RHEL based ami such as ami-e3106686
 
 Usage
 -----
